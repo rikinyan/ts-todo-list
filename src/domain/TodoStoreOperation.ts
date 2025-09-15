@@ -28,10 +28,8 @@ export default class TodoStoreOperation {
     update(id: string, description: string, isEnd: boolean) {
         try {
             this.store.update(id, description, isEnd)
-            description = description
-            isEnd = isEnd
         }catch (e) {
-            console.log(e)
+            throw e
         }
      }
 }
