@@ -8,8 +8,8 @@ export default class List extends Command {
     '<%= config.bin %> <%= command.id %>',
   ]
   public async run(): Promise<void> {
-    const todoOperation = new TodoStoreOperation(new TodoDatabase())
-    const list = todoOperation.selectList()
+    const todoOperation = new TodoStoreOperation(new TodoDatabase(".todos.db"))
+    const list = await todoOperation.selectList()
     this.log(list.displaystring())
   }
 }

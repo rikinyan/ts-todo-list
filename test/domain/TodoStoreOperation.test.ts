@@ -24,12 +24,12 @@ class TodoDataStoreStub implements TodoStore {
         this.storedTodos[id] = todo
     }
 
-    selectList(): TodoList {
+    async selectList(): Promise<TodoList> {
         const todos = Object.values(this.storedTodos)
         return new TodoList(todos)
     }
 
-    selectTodo(id: string): Todo | null {
+    async selectTodo(id: string): Promise<Todo | null> {
         const todo = this.storedTodos[id]
         if (todo === undefined) {
             return null
@@ -37,7 +37,7 @@ class TodoDataStoreStub implements TodoStore {
         return todo
     }
 
-    update(id: string, description: string, isEnd: boolean): void {
+    async update(id: string, description: string, isEnd: boolean) {
         const todo = this.storedTodos[id]
         if (todo === undefined) {
             throw Error("Todo associated with this id don't exist.")
@@ -48,35 +48,34 @@ class TodoDataStoreStub implements TodoStore {
         this.storedTodos[id] = todo
     }
 
-    delete(id: string): void {
+    async delete(id: string) {
         delete this.storedTodos[id]
     }
 }
 
-describe("update test", () => {
+describe("update test", async () => {
     const store = new TodoDataStoreStub()
     store.create("test todo")
     assert.equal(Object.keys(store.storedTodos).length, 1)
-    console.log(Object.keys(store.storedTodos))
     assert.equal(store.storedTodos["0"].description, "test todo")
     assert.equal(store.storedTodos["0"].isEnd, false)
 
     const operations = new TodoStoreOperation(store)
 
-    operations.update("0", "updated test todo", false)
+    await operations.update("0", "updated test todo", false)
     assert.equal(store.storedTodos["0"].description, "updated test todo")
 
-    operations.update("0", "udpated test todo", true)
+    await operations.update("0", "udpated test todo", true)
     assert.equal(store.storedTodos["0"].isEnd, true)
 })
 
-describe("update error test", () => {
+describe("update error test", async () => {
     const store = new TodoDataStoreStub()
     const operations = new TodoStoreOperation(store)
 
     assert.throw(
-        function() {
-            operations.update("0", "updated test todo", false)
+        async function() {
+            await operations.update("0", "updated test todo", false)
         },
         "Todo associated with this id don't exist."
     )

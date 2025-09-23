@@ -20,5 +20,5 @@ export interface TodosTable {
 }
 
 export type TodoEntity = Selectable<TodosTable>
-export type NewTodoEntigy = Insertable<TodosTable>
+export type NewTodoEntity = Insertable<TodosTable>
 export type TodoUpdate = Updateable<TodosTable>

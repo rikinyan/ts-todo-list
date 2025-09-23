@@ -26,8 +26,8 @@ export default class Remove extends Command {
       return
     }
 
-    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase())
-    todoStoreOperation.deleteTodo(id)
+    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase(".todos.db"))
+    await todoStoreOperation.deleteTodo(id)
     this.log(`success remove id${id}`)
   }
 }

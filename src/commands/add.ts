@@ -20,7 +20,7 @@ export default class Add extends Command {
       return
     }
 
-    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase())
+    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase(".todos.db"))
     todoStoreOperation.createTodo(description)
   }
 }

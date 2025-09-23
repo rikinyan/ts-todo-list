@@ -1,4 +1,4 @@
-import { Kysely } from "kysely";
+import { Kysely, WhereNode } from "kysely";
 import Todo from "../domain/Todo.js";
 import TodoList from "../domain/TodoList.js";
 import TodoStore from "./../domain/TodoStore.js"
@@ -8,13 +8,11 @@ import { connectDatabase } from "./ConnectDatabase.js";
 export default class TodoDatabase implements TodoStore {
     db: Kysely<Database>
 
-    constructor() {
-        this.db = connectDatabase()
+    constructor(dbPath: string) {
+        this.db = connectDatabase(dbPath)
     }
 
     async create(description: string): Promise<void> {
-        console.log("save description", description)
-
         const result = await this.db
         .insertInto("todos")
         .values({
@@ -23,18 +21,53 @@ export default class TodoDatabase implements TodoStore {
         })
         .executeTakeFirst()
     }
-    selectList(): TodoList {
-        console.log("return TodoList")
-        return new TodoList([ new Todo("1", "aa", true, new Date()) ])
+    async selectList(): Promise<TodoList> {
+        const result = await this.db
+        .selectFrom("todos")
+        .selectAll()
+        .execute()
+        
+        return new TodoList(
+            result.map((entity) => {
+                return new Todo(
+                    entity.id.toString(),
+                    entity.description.toString(),
+                    entity.is_end === 1,
+                    entity.created_at
+                )
+            })
+        )
     }
-    selectTodo(id: string): Todo | null {
-        console.log("return Todo")
-        return new Todo(id, "aa", true, new Date()) 
+    async selectTodo(id: string): Promise<Todo | null> {
+        const result = await this.db
+        .selectFrom("todos")
+        .selectAll()
+        .where("id", "=", +id)
+        .execute()
+
+        if(result.length != 1) { return null }
+
+        let entity = result[0]
+
+        return new Todo(
+            entity.id.toString(),
+            entity.description.toString(),
+            entity.is_end === 1,
+            entity.created_at
+        )
     }
-    update(id: string, description: string, isEnd: boolean): void {
-        console.log("update Todo")
+    async update(id: string, description: string, isEnd: boolean): Promise<void>{
+        await this.db.updateTable("todos")
+        .set({
+            description: description,
+            is_end: isEnd ? 1 : 0
+        })
+        .where("id", "=", +id)
+        .execute()
     }
-    delete(id: string): void {
-        console.log("remove Todo")
+    async delete(id: string): Promise<void>{
+        await this.db.deleteFrom("todos")
+        .where("id", "=", +id)
+        .execute()
     }
 }

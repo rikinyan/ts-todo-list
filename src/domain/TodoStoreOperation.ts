@@ -13,21 +13,21 @@ export default class TodoStoreOperation {
         this.store.create(description)
     }
 
-    selectList(): TodoList{
-        return this.store.selectList()
+    async selectList(): Promise<TodoList> {
+        return await this.store.selectList()
     }
 
-    selectTodo(id: string): Todo | null {
-        return this.store.selectTodo(id)
+    async selectTodo(id: string): Promise<Todo | null> {
+        return await this.store.selectTodo(id)
     }
 
-    deleteTodo(id: string) {
-        this.store.delete(id)
+    async deleteTodo(id: string) {
+        await this.store.delete(id)
     }
 
-    update(id: string, description: string, isEnd: boolean) {
+    async update(id: string, description: string, isEnd: boolean) {
         try {
-            this.store.update(id, description, isEnd)
+            await this.store.update(id, description, isEnd)
         }catch (e) {
             throw e
         }

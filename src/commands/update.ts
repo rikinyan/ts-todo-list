@@ -24,9 +24,9 @@ export default class Update extends Command {
       return 
     }
 
-    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase())
+    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase(".todos.db"))
 
-    const todo = todoStoreOperation.selectTodo(todoId)
+    const todo = await todoStoreOperation.selectTodo(todoId)
     if (todo === null) {
       this.log(`id-${todoId} todo doesn't exist.`)
       return
@@ -43,7 +43,7 @@ export default class Update extends Command {
     }
 
 
-    todoStoreOperation.update(
+    await todoStoreOperation.update(
       todoId,
       newDescription,
       newIsEnd
