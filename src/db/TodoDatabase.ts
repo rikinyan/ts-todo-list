@@ -2,6 +2,7 @@ import { Kysely } from "kysely";
 import Todo from "../domain/Todo.js";
 import TodoList from "../domain/TodoList.js";
 import { Database } from "./DatabaseType.js";
+import TodoStore from "../domain/TodoStore.js"
 import { connectDatabase } from "./ConnectDatabase.js";
 
 export default class TodoDatabase implements TodoStore {
@@ -12,12 +13,13 @@ export default class TodoDatabase implements TodoStore {
     }
 
     async create(description: string): Promise<void> {
-        const result = await this.db
-        .insertInto("todos")
-        .values({
-            is_end: 0,
-        })
-        .executeTakeFirst()
+        await this.db
+            .insertInto("todos")
+            .values({
+		description: description,
+                is_end: 0,
+            })
+            .executeTakeFirst()
     }
     async selectList(): Promise<TodoList> {
         const result = await this.db
