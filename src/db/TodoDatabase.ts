@@ -1,7 +1,6 @@
-import { Kysely, WhereNode } from "kysely";
+import { Kysely } from "kysely";
 import Todo from "../domain/Todo.js";
 import TodoList from "../domain/TodoList.js";
-import TodoStore from "./../domain/TodoStore.js"
 import { Database } from "./DatabaseType.js";
 import { connectDatabase } from "./ConnectDatabase.js";
 
@@ -16,7 +15,6 @@ export default class TodoDatabase implements TodoStore {
         const result = await this.db
         .insertInto("todos")
         .values({
-            description: description,
             is_end: 0,
         })
         .executeTakeFirst()
@@ -45,9 +43,9 @@ export default class TodoDatabase implements TodoStore {
         .where("id", "=", +id)
         .execute()
 
-        if(result.length != 1) { return null }
+        if(result.length !== 1) { return null }
 
-        let entity = result[0]
+        const entity = result[0]
 
         return new Todo(
             entity.id.toString(),
