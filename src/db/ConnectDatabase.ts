@@ -3,7 +3,7 @@ import SQLite from 'better-sqlite3'
 import { Database } from './DatabaseType.js'
 import { readFileSync } from 'fs'
 
-const dbPath = process.env.TODO_DATABASE || ":memory"
+const dbPath = process.env.TODO_DATABASE || ":memory:"
 
 function dbConnection() {
     const sqlite = new SQLite(dbPath) 

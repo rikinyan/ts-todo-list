@@ -1,9 +1,12 @@
 import TodoDatabase from "../../src/db/TodoDatabase.js"
-import {describe} from "mocha"
+import {describe, beforeEach} from "mocha"
 import {assert} from "chai"
 
 describe("use database test", async () => {
     const database = new TodoDatabase()
+    beforeEach(async function() {
+	await database.deleteAll()
+    })
 
     database.create("test todo1")
     database.create("test todo2")

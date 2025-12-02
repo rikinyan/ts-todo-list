@@ -70,4 +70,8 @@ export default class TodoDatabase implements TodoStore {
         .where("id", "=", +id)
         .execute()
     }
+    async deleteAll(): Promise<void> {
+	await this.db.deleteFrom("todos")
+	    .execute()
+    }
 }

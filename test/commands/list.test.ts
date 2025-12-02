@@ -1,11 +1,17 @@
 import {runCommand} from '@oclif/test'
+import {sharedDbConnection} from "../../src/db/ConnectDatabase.js"
 import {expect} from 'chai'
 
 describe('list', () => {
-  it('runs list cmd', async () => {
-    await runCommand('add "list-test-todo"')
+    beforeEach(async () => {
+	await sharedDbConnection.deleteFrom("todos").execute()
+    })
+    
+    it('runs list cmd', async () => {
+	await runCommand('add "todo1"')
+	await runCommand('add "todo2"')
 
-    const {stdout} = await runCommand('list')
-    expect(stdout).to.contain('[] test1\n[] test2')
-  })
+	const {stdout} = await runCommand('list')
+	expect(stdout).to.match(/\[ \] \d*: todo1\n\[ \] \d*: todo2\n\n/)
+    })
 })
