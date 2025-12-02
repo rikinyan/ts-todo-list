@@ -3,12 +3,9 @@ import {expect} from 'chai'
 
 describe('list', () => {
   it('runs list cmd', async () => {
-    const {stdout} = await runCommand('list')
-    expect(stdout).to.contain('hello world')
-  })
+    await runCommand('add "test"')
 
-  it('runs list --name oclif', async () => {
-    const {stdout} = await runCommand('list --name oclif')
-    expect(stdout).to.contain('hello oclif')
+    const {stdout} = await runCommand('list')
+    expect(stdout).to.contain('[] test1\n[] test2')
   })
 })

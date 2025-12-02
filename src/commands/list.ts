@@ -1,4 +1,4 @@
-import {Args, Command, Flags} from '@oclif/core'
+import {Command} from '@oclif/core'
 import TodoDatabase from '../db/TodoDatabase.js'
 import TodoStoreOperation from '../domain/TodoStoreOperation.js'
 
@@ -8,7 +8,7 @@ export default class List extends Command {
     '<%= config.bin %> <%= command.id %>',
   ]
   public async run(): Promise<void> {
-    const todoOperation = new TodoStoreOperation(new TodoDatabase(".todos.db"))
+    const todoOperation = new TodoStoreOperation(new TodoDatabase(":memory:"))
     const list = await todoOperation.selectList()
     this.log(list.displaystring())
   }

@@ -4,11 +4,11 @@ import {expect} from 'chai'
 describe('add', () => {
   it('runs add cmd', async () => {
     const {stdout} = await runCommand('add')
-    expect(stdout).to.contain('hello world')
+    expect(stdout).to.contain('write todo\'s description.')
   })
 
-  it('runs add --name oclif', async () => {
-    const {stdout} = await runCommand('add --name oclif')
-    expect(stdout).to.contain('hello oclif')
+  it('runs add with description arg', async () => {
+    const {stdout} = await runCommand('add "todo description"')
+    expect(stdout).to.contain('created TODO "todo description"')
   })
 })

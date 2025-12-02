@@ -1,4 +1,4 @@
-import {Args, Command, Flags} from '@oclif/core'
+import {Args, Command} from '@oclif/core'
 import TodoDatabase from '../db/TodoDatabase.js'
 import TodoStoreOperation from '../domain/TodoStoreOperation.js'
 
@@ -6,6 +6,7 @@ export default class Add extends Command {
   static override args = {
     description: Args.string({description: "todo description"}) 
   }
+
   static override description = 'describe the command here'
   static override examples = [
     '<%= config.bin %> <%= command.id %>',
@@ -20,7 +21,12 @@ export default class Add extends Command {
       return
     }
 
-    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase(".todos.db"))
-    todoStoreOperation.createTodo(description)
+    try {
+      const todoStoreOperation = new TodoStoreOperation(new TodoDatabase(":memory:"))
+      todoStoreOperation.createTodo(description)
+      this.log(`created TODO "${description}"`)
+    } catch {
+      this.log("error!")
+    }
   }
 }
