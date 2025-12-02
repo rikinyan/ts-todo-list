@@ -22,7 +22,7 @@ export default class Add extends Command {
     }
 
     try {
-      const todoStoreOperation = new TodoStoreOperation(new TodoDatabase(":memory:"))
+      const todoStoreOperation = new TodoStoreOperation(new TodoDatabase())
       todoStoreOperation.createTodo(description)
       this.log(`created TODO "${description}"`)
     } catch {

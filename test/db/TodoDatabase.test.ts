@@ -3,7 +3,7 @@ import {describe} from "mocha"
 import {assert} from "chai"
 
 describe("use database test", async () => {
-    const database = new TodoDatabase(":memory:")
+    const database = new TodoDatabase()
 
     database.create("test todo1")
     database.create("test todo2")

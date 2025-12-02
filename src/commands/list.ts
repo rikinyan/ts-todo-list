@@ -8,7 +8,7 @@ export default class List extends Command {
     '<%= config.bin %> <%= command.id %>',
   ]
   public async run(): Promise<void> {
-    const todoOperation = new TodoStoreOperation(new TodoDatabase(":memory:"))
+    const todoOperation = new TodoStoreOperation(new TodoDatabase())
     const list = await todoOperation.selectList()
     this.log(list.displaystring())
   }

@@ -3,13 +3,13 @@ import Todo from "../domain/Todo.js";
 import TodoList from "../domain/TodoList.js";
 import { Database } from "./DatabaseType.js";
 import TodoStore from "../domain/TodoStore.js"
-import { connectDatabase } from "./ConnectDatabase.js";
+import { sharedDbConnection } from "./ConnectDatabase.js";
 
 export default class TodoDatabase implements TodoStore {
     db: Kysely<Database>
 
-    constructor(dbPath: string) {
-        this.db = connectDatabase(dbPath)
+    constructor() {
+        this.db = sharedDbConnection
     }
 
     async create(description: string): Promise<void> {

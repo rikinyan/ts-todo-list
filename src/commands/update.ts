@@ -24,7 +24,7 @@ export default class Update extends Command {
       return 
     }
 
-    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase(".todos.db"))
+    const todoStoreOperation = new TodoStoreOperation(new TodoDatabase())
 
     const todo = await todoStoreOperation.selectTodo(todoId)
     if (todo === null) {
