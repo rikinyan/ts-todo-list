@@ -1,20 +1,21 @@
-ts-todo-list
-=================
+# ts-todo-list
 
 todolist
-
 
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/ts-todo-list.svg)](https://npmjs.org/package/ts-todo-list)
 [![Downloads/week](https://img.shields.io/npm/dw/ts-todo-list.svg)](https://npmjs.org/package/ts-todo-list)
 
-
 <!-- toc -->
-* [Usage](#usage)
-* [Commands](#commands)
+
+- [Usage](#usage)
+- [Commands](#commands)
 <!-- tocstop -->
+
 # Usage
+
 <!-- usage -->
+
 ```sh-session
 $ npm install -g ts-todo-list
 $ ts-todo-list COMMAND
@@ -26,22 +27,26 @@ USAGE
   $ ts-todo-list COMMAND
 ...
 ```
+
 <!-- usagestop -->
+
 # Commands
+
 <!-- commands -->
-* [`ts-todo-list hello PERSON`](#ts-todo-list-hello-person)
-* [`ts-todo-list hello world`](#ts-todo-list-hello-world)
-* [`ts-todo-list help [COMMAND]`](#ts-todo-list-help-command)
-* [`ts-todo-list plugins`](#ts-todo-list-plugins)
-* [`ts-todo-list plugins add PLUGIN`](#ts-todo-list-plugins-add-plugin)
-* [`ts-todo-list plugins:inspect PLUGIN...`](#ts-todo-list-pluginsinspect-plugin)
-* [`ts-todo-list plugins install PLUGIN`](#ts-todo-list-plugins-install-plugin)
-* [`ts-todo-list plugins link PATH`](#ts-todo-list-plugins-link-path)
-* [`ts-todo-list plugins remove [PLUGIN]`](#ts-todo-list-plugins-remove-plugin)
-* [`ts-todo-list plugins reset`](#ts-todo-list-plugins-reset)
-* [`ts-todo-list plugins uninstall [PLUGIN]`](#ts-todo-list-plugins-uninstall-plugin)
-* [`ts-todo-list plugins unlink [PLUGIN]`](#ts-todo-list-plugins-unlink-plugin)
-* [`ts-todo-list plugins update`](#ts-todo-list-plugins-update)
+
+- [`ts-todo-list hello PERSON`](#ts-todo-list-hello-person)
+- [`ts-todo-list hello world`](#ts-todo-list-hello-world)
+- [`ts-todo-list help [COMMAND]`](#ts-todo-list-help-command)
+- [`ts-todo-list plugins`](#ts-todo-list-plugins)
+- [`ts-todo-list plugins add PLUGIN`](#ts-todo-list-plugins-add-plugin)
+- [`ts-todo-list plugins:inspect PLUGIN...`](#ts-todo-list-pluginsinspect-plugin)
+- [`ts-todo-list plugins install PLUGIN`](#ts-todo-list-plugins-install-plugin)
+- [`ts-todo-list plugins link PATH`](#ts-todo-list-plugins-link-path)
+- [`ts-todo-list plugins remove [PLUGIN]`](#ts-todo-list-plugins-remove-plugin)
+- [`ts-todo-list plugins reset`](#ts-todo-list-plugins-reset)
+- [`ts-todo-list plugins uninstall [PLUGIN]`](#ts-todo-list-plugins-uninstall-plugin)
+- [`ts-todo-list plugins unlink [PLUGIN]`](#ts-todo-list-plugins-unlink-plugin)
+- [`ts-todo-list plugins update`](#ts-todo-list-plugins-update)
 
 ## `ts-todo-list hello PERSON`
 
@@ -394,4 +399,5 @@ DESCRIPTION
 ```
 
 _See code: [@oclif/plugin-plugins](https://github.com/oclif/plugin-plugins/blob/v5.4.46/src/commands/plugins/update.ts)_
+
 <!-- commandsstop -->
