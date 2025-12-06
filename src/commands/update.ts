@@ -10,10 +10,7 @@ export default class Update extends Command {
   static override examples = ["<%= config.bin %> <%= command.id %>"];
   static override flags = {
     description: Flags.string({ char: "d", description: "todo's description" }),
-    isEnd: Flags.boolean({
-      char: "e",
-      description: "whether this todo has end",
-    }),
+    isEnd: Flags.boolean({ char: "e", description: "end todo" }),
   };
 
   public async run(): Promise<void> {
@@ -44,7 +41,5 @@ export default class Update extends Command {
     }
 
     await todoStoreOperation.update(todoId, newDescription, newIsEnd);
-
-    this.log(`id${todoId} todo success updates.`);
   }
 }

@@ -62,7 +62,7 @@ export default class TodoDatabase implements TodoStore {
         description: description,
         is_end: isEnd ? 1 : 0,
       })
-      .where("id", "=", +id)
+      .where("id", "=", id as any as number)
       .execute();
   }
   async delete(id: string): Promise<void> {
