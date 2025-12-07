@@ -8,6 +8,6 @@ export default class List extends Command {
   public async run(): Promise<void> {
     const todoOperation = new TodoStoreOperation(new TodoDatabase());
     const list = await todoOperation.selectList();
-    this.log(list.displaystring());
+    this.log(list.displayString());
   }
 }

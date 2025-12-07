@@ -11,7 +11,7 @@ describe("TodoList displayString", () => {
   const todoList = new TodoList([todo1, todo2]);
 
   assert.equal(
-    todoList.displaystring(),
+    todoList.displayString(),
     `[ ] 1: test todo1\n[x] 2: test todo2\n`,
   );
 });

@@ -1,8 +1,8 @@
 export default class Todo {
-  id: string;
-  description: string;
-  isEnd: boolean;
-  createdDate: Date;
+  readonly id: string;
+  readonly description: string;
+  readonly isEnd: boolean;
+  readonly createdDate: Date;
 
   constructor(
     id: string,
@@ -16,7 +16,7 @@ export default class Todo {
     this.createdDate = createdDate;
   }
 
-  displaystring(): string {
+  displayString(): string {
     const isEndstring = this.isEnd ? "[x]" : "[ ]";
     return `${isEndstring} ${this.id}: ${this.description}`;
   }

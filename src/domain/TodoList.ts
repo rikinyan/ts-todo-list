@@ -7,9 +7,9 @@ export default class TodoList {
     this.todos = todos;
   }
 
-  displaystring(): string {
+  displayString(): string {
     return this.todos.reduce(
-      (str, todo) => str + todo.displaystring() + "\n",
+      (str, todo) => str + todo.displayString() + "\n",
       "",
     );
   }

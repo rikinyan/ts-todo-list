@@ -1,5 +1,6 @@
-import { describe } from "mocha";
 import { assert } from "chai";
+import { describe } from "mocha";
+
 import Todo from "../../src/domain/Todo";
 import TodoList from "../../src/domain/TodoList";
 import TodoStoreOperation from "../../src/domain/TodoStoreOperation.js";
@@ -29,18 +30,18 @@ class TodoDataStoreStub implements TodoStore {
     if (todo === undefined) {
       return null;
     }
+
     return todo;
   }
 
   async update(id: string, description: string, isEnd: boolean) {
     const todo = this.storedTodos[id];
     if (todo === undefined) {
-      throw Error("Todo associated with this id don't exist.");
+      throw new Error("Todo associated with this id don't exist.");
     }
 
-    todo.description = description;
-    todo.isEnd = isEnd;
-    this.storedTodos[id] = todo;
+    const newTodo = new Todo(id, description, isEnd, todo.createdDate);
+    this.storedTodos[id] = newTodo;
   }
 
   async delete(id: string) {
@@ -68,7 +69,7 @@ describe("update error test", async () => {
   const store = new TodoDataStoreStub();
   const operations = new TodoStoreOperation(store);
 
-  assert.throw(async function () {
+  assert.throw(async () => {
     await operations.update("0", "updated test todo", false);
   }, "Todo associated with this id don't exist.");
 });
