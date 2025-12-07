@@ -1,5 +1,3 @@
-import TodoStore from "./TodoStore.js";
-
 export default class Todo {
   id: string;
   description: string;
