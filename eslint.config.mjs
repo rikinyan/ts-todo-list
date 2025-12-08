@@ -9,4 +9,14 @@ const gitignorePath = path.resolve(
   ".gitignore",
 );
 
-export default [includeIgnoreFile(gitignorePath), ...oclif, prettier];
+export default [
+  includeIgnoreFile(gitignorePath), 
+  ...oclif,
+  prettier,
+  {
+    rules: {
+      "perfectionist/sort-union-types": "off",
+      "perfectionist/sort-classes": "off"
+    }
+  }
+];

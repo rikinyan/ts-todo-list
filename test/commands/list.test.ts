@@ -12,7 +12,6 @@ describe("list", () => {
     await runCommand('add "todo2"');
 
     const { stdout } = await runCommand("list");
-    console.log(stdout);
     expect(stdout).to.match(/\[ \] \d*: todo1\n\[ \] \d*: todo2\n\n/);
   });
 });
