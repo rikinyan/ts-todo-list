@@ -1,9 +1,20 @@
 import { Kysely, SqliteDialect } from "kysely";
 import SQLite from "better-sqlite3";
 import { Database } from "./DatabaseType.js";
-import { readFileSync } from "fs";
 
-const dbPath = process.env.TODO_DATABASE || ":memory:";
+//const dbPath = process.env.TODO_DATABASE ||`${process.env.HOME}/.ts-todo-list/todo.db`
+const dbPath = ":memory:"//process.env.TODO_DATABASE ||`${process.env.HOME}/.ts-todo-list/todo.db`
+
+const createTodoTableSql = `
+create table if not exists todos (
+    id integer primary key autoincrement,
+    description string not null,
+    is_end integer default 0,
+    created_at text not null default (datetime()),
+    updated_at text not null default (datetime())
+);
+
+`
 
 function dbConnection() {
   const sqlite = new SQLite(dbPath);
@@ -16,13 +27,12 @@ function dbConnection() {
       return table.name === "todos";
     })
   ) {
+    sqlite.exec(createTodoTableSql);
     console.log("init todo table");
-    const createTableSql = readFileSync("./TodoTable.sql", "utf8");
-    sqlite.exec(createTableSql);
   }
 
   const dialect = new SqliteDialect({
-    database: sqlite,
+    database: sqlite
   });
 
   const db = new Kysely<Database>({
@@ -32,4 +42,6 @@ function dbConnection() {
   return db;
 }
 
-export const sharedDbConnection = dbConnection();
+const sharedDbConnection = dbConnection();
+
+export default sharedDbConnection

@@ -1,6 +1,6 @@
 import { runCommand } from "@oclif/test";
 import { expect, assert } from "chai";
-import { sharedDbConnection } from "../../src/db/ConnectDatabase.js";
+import sharedDbConnection from "../../src/db/ConnectDatabase.js";
 
 describe("update", () => {
   beforeEach(async () => {

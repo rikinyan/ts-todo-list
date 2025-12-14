@@ -1,5 +1,5 @@
 import { runCommand } from "@oclif/test";
-import { sharedDbConnection } from "../../src/db/ConnectDatabase.js";
+import sharedDbConnection from "../../src/db/ConnectDatabase.js";
 import { expect } from "chai";
 
 describe("add", () => {
